@@ -6,7 +6,6 @@ class Footer extends Component {
 
     return (
       <footer>
-        <hr style={{color:'white'}}/>
         <div className="row">
           <Fade bottom>
             <div className="twelve columns">

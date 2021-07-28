@@ -8,6 +8,7 @@ const HomePage = () => {
         <section id="HomePage">
             <Header />
             <About />
+            <hr style={{color:'white'}}/>
             <Footer />
         </section>
     );

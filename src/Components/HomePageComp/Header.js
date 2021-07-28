@@ -10,7 +10,7 @@ class Header extends Component {
     const description = "Wire your web with ease.....";
     const design="";
     return (
-      <header id="home">
+      <header id="home_header">
         <ParticlesBg type="circle" bg={true} />
 
         <nav id="nav-wrap">
@@ -22,7 +22,7 @@ class Header extends Component {
           </a>
 
           <ul id="nav" className="nav">
-                <li className="smoothscroll">
+                <li className="current">
                     <Link className="smoothscroll" to="/home">Home</Link>
                 </li>
 
