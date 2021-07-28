@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import {Modal,Button} from 'react-bootstrap';
+import Form from "./Form";
 
 const Board = (props) => {
   // useEffect(() => {
   //     if(props.form!==null){
-  //         document.querySelector("#design_board").innerHTML=props.form;
+  //         document.querySelector("#form-result-content").replaceWith();
   //     }
   // }, [props.form]);
   return (
   <div id="design_board">
-    
-      
     <Modal 
             show={props.showModal} 
             onHide={props.onClose} 
@@ -21,7 +20,7 @@ const Board = (props) => {
            <br></br> <h1>Form JSON</h1><br></br>
           <Modal.Body >
             <div className="modal_container" style={{border:"none", margin: "30px"}} >
-                    {props.form}
+                    {JSON.stringify(props.form)}
             </div>
           </Modal.Body>
           <Modal.Footer  className="modal_footer">
@@ -30,11 +29,15 @@ const Board = (props) => {
             </Button>
           </Modal.Footer>
         </Modal>
-                  <img
-                className="result-pic"
+        <div className="form-result">
+          {props.form==null ?
+              <img  id="form-result-content"
                 src={"images/result.jpg"}
                 alt="Nordic Giant Profile Pic"
-              />
+              />:
+              < Form form={props.form}/>
+          }
+        </div>
   </div>);
 };
 

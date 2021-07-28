@@ -1,8 +1,14 @@
-const Loading = (props) => {
-    return(
-        <div id="leading_screen" display={props.loading?"flex":"none"}>
+import {BeatLoader} from 'react-spinners';
 
-        </div>
+
+
+const Loading = (props) => {
+    return(props.loading?
+        <div id="loading_screen">
+            <img id="loading_gif" src={"images/loading.gif"} alt="loading..." />
+            <BeatLoader color={"white"} loading={true} size={50} margin={40} />
+        </div>:
+        <></>
     );
 }
 

@@ -516,16 +516,48 @@ footer .social-links li:first-child { margin-left: 0; }
    background-color: rgb(202, 203, 204);
    height: 100%;
    width: 100%;
+   overflow: hidden;
    z-index: -1;
+   display: flex;
+   flex-grow: 1;
 }
 
 #left_panel{
    position: fixed;
    background-color: rgb(245, 246, 248);
+   flex: 1;
    height: 100%;
-   width: 15%;
-   left: 0;
-   top: 80px;
+}
+
+#left_panel_heading {
+   margin: 40px 20px 20px;
+   font: 36px Arial;
+   display: block;
+}
+
+#left_panel_body {
+   margin: 20px;
+   background-color:#ccc;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: stretch;
+   border-radius: 10px;
+   padding: 10px;
+}
+
+.left-panel-item {
+   display: inline-block;
+   background-color: white;
+   padding: 10px 20px;
+   border-radius: 10px;
+   margin: 4px 0;
+}
+
+.left-panel-item:hover {
+   background-color:darksalmon;
+   font-weight: bold;
+   color: white;
 }
 
 .Name{
@@ -540,16 +572,17 @@ footer .social-links li:first-child { margin-left: 0; }
 }
 
 .toolbar{
-   position: relative;
+   position: absolute;
    overflow: hidden;
    display: flex;
    justify-content: space-evenly;
    top: 2%;
-   width: 20%;
-   margin: 0 auto;
-   background-color: rgb(94, 94, 95);
+   width: 30%;
+   margin-left: 40%;
+   background-color: rgb(167, 166, 166);
    border-radius: 16px;
    padding: 12px;
+   z-index: 1;
 }
  .toolbar_item {
     display: inline;
@@ -610,30 +643,51 @@ footer .social-links li:first-child { margin-left: 0; }
    
 }
 
-.leading_screen {
-   width: 100%;
-   height: 100%;
-   display: none ;
-   background-color: black;
-   opacity: .1;
-   z-index: 100;
+#loading_screen {
+   position: fixed; 
+   height: 100%; 
+   width: 100%; 
+   background: black; 
+   opacity: 0.85;
+   z-index: 2;
+   display: flex;
+   align-items:center;
+   flex-direction: column;
+}
+
+#loader {
+   color: white;
+   z-index: 300;
+}
+
+#loading_gif {
+   width: 40%;
+   height: 60%;
+   opacity: 1;
+}
+
+.fail-alert{
+   width: 50%;
+   height: 200px;
+   z-index: 300;
+   font-size: 30px !important;
+   size: 30px!important;
 }
 
 #design_board{
-   position: absolute;
-   height: 100%;
-   width: 100%;
-   right: 0;
-   top: 80px;
+   flex: 5;
    display: flex;
    justify-content: center;
-   z-index: -1;
+   overflow: scroll;
 }
 
-.result-pic {
-   top: 30%;
-   height: 80%;
-   
+.form-result {
+   margin-top: 2%;
+   height: auto;
+   margin-bottom: 2%;
+}
+#form-result-content{
+   position: relative;
 }
 
 .alert {

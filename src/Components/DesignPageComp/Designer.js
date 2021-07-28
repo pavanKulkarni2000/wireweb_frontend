@@ -4,28 +4,29 @@ import Toolbar from "./DesignerComponents/Toolbar";
 import { useState } from "react";
 import Loading from "./Loading";
 import Board from "./DesignerComponents/Board";
+import Alert from '@material-ui/lab/Alert';
 
 const Designer = () => {
+  //for image upload
   const [modalShow, setModalShow] = useState(false);
   const handleClose = () => setModalShow(false);
   const handleOpen = () => setModalShow(true);
 
+  //to display loading screen while image digitization
   const [loading, setLoading] = useState(false);
-  const handleFinishLoading = () => setLoading(false);
-  const handleStartLoading = () => setLoading(true);
-
-  const [form, setForm] = useState("");
+  //to set current form
+  const [form, setForm] = useState(null);
+  //to show form digitization result as alert
   const [showAlert, setshowAlert] = useState(false);
 
 
-  var formJson = "";
   const handleUpload = (e) => {
-    handleStartLoading();
+    setLoading(true);
     e.preventDefault();
     console.log("uploading");
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    fetch("http://013fef861b22.ngrok.io/design", {
+    fetch("http://0915ce60e875.ngrok.io", {
       method: "POST",
       body: formData,
     })
@@ -34,32 +35,57 @@ const Designer = () => {
         if (res.ok) {
           return res.json();
         }else{
-          return null;
+          throw new Error("result not OK");
         }
       })
       .then((data)=> {
         // `data` is the parsed version of the JSON returned from the above endpoint.
         console.log(data.json);
-        setForm(data.json);
-        setshowAlert(true)
+        var str = data.json.replace(/\\n/g, "\\n")  
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f");
+        // remove non-printable and other non-valid JSON chars
+        str = str.replace(/[\u0000-\u0019]+/g,""); 
+        str=JSON.parse(str);
+        console.log(str);
+        setForm(str);
+        setshowAlert(true);
+        setLoading(false);
+      }).catch((err)=>{
+        console.log(err);
+        setLoading(false);
       });
       console.log("outside");
   };
 
   return (
     <div id="designer_body">
-      
-      <Board form={form} showModal={showAlert} onClose={() => setshowAlert(false)}/>
-      <LeftPanel />
-      <Toolbar onAdd={handleOpen} />
 
+      <Loading 
+        loading={loading} 
+      />
+      {/* <Alert className="fail-alert" severity="error">Server Error!</Alert> */}
+      <LeftPanel 
+        form={form} 
+      />
+      <Toolbar
+        onAdd={handleOpen} 
+      />
+      <Board 
+        form={form} 
+        showModal={showAlert} 
+        onClose={() => setshowAlert(false)}
+      />
       <ModalImageUpload
         showModal={modalShow}
         onClose={handleClose}
         onUpload={handleUpload}
       />
-      
-      <Loading loading={loading} />
     </div>
   );
 };
