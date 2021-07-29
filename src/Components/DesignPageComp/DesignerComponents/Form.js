@@ -87,7 +87,13 @@ const Form = (props) => {
                     fontSize: "30px",
                     display:"inline"
                 }}>{widget.text}</div>;
-                case "text_area":return <TextField multiline label="Multiline" variant="outlined">{widget.text}</TextField>
+                case "text_area":return <input type="textarea" style={{
+                    position:"absolute",
+                    left: widget.box[0],
+                    top: widget.box[1],
+                    width: widget.box[2],
+                    height: widget.box[3],
+                }} key={widget.box.toString()} value={widget.text} />
                 case "section_header":return <u> <h1 style={{
                     position:"absolute",
                     left: widget.box[0],

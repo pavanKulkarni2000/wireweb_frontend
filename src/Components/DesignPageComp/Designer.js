@@ -26,7 +26,7 @@ const Designer = () => {
     console.log("uploading");
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
-    fetch("http://0915ce60e875.ngrok.io", {
+    fetch("http://e4fda4dec642.ngrok.io", {
       method: "POST",
       body: formData,
     })
