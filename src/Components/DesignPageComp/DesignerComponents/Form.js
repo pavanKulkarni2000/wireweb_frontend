@@ -1,113 +1,115 @@
-// import { Button , Input , Table , Select } from "semantic-ui-react";
-import { Button , TextField , MenuItem , Table , FormControlLabel , Radio , Checkbox  } from '@material-ui/core';
+// import {Table} from '@material-ui/core';
 
 
 const Form = (props) => {
-    var form_obj=props.form;
-    console.log(form_obj.w, form_obj.h);
-    console.log(form_obj);
-    return (
-    <div id="form-result-content" style={{
-        width:form_obj.w,
-        height:form_obj.h,
-        backgroundColor:"White"}}>
-        {form_obj.widgets.map(widget => {
-            
-            switch (widget.class){
-                // case "button":return <Button variant="contained" style={{
-                //     left: widget.box[0],
-                //     top: widget.box[1],
-                //     size: widget.box[2]
-                // }}>{widget.text}</Button>;
-                // case "text_box":return <TextField id="outlined-basic" label="Outlined" variant="outlined" style={{
-                //     left: widget.box[0],
-                //     top: widget.box[1],
-                //     size: widget.box[2]
-                // }}>{widget.text} </TextField>
-                // case "drop_down":return <TextField select label="Select"  variant="outlined"  style={{
-                //     left: widget.box[0],
-                //     top: widget.box[1],
-                //     size: widget.box[2]
-                // }}><MenuItem key={widget.text} value={widget.text}>{widget.text}</MenuItem></TextField>
-                // case "table":return <Table aria-label="simple table">{widget.text}</Table>;
-                // case "text":return <div style={style}>{widget.text}</div>;
-                // case "text_area":return <TextField multiline label="Multiline" variant="outlined">{widget.text}</TextField>
-                // case "section_header":return <u> <h1 style={style}>{widget.text}</h1></u>;
-                // case "radio": return <FormControlLabel value={widget.text} control={<Radio />} size={widget.box[3]+"px"} />;
-                // case "check_box": return <FormControlLabel value={widget.text} size={widget.box[3]+"px"} control={<Checkbox/>}/>;
-                // case "radio": return <FormControlLabel value={widget.text} control={<Radio />} size={widget.box[3]+"px"} />;
-                // case "check_box": return <FormControlLabel value={widget.text} size={widget.box[3]+"px"} control={<Checkbox/>}/>;
-                case "drop_down": return <select style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    size: widget.box[2]
-                }} ><option>{widget.text}</option> </select>
-                case "button": return <input type="button" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2]
-                }} key={widget.box.toString()} value={widget.text} />
-                case "text_box": return <input type="text" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2]
-                }} key={widget.box.toString()} value={widget.text} />
-                case "radio": return <input type="radio" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2],
-                    height: widget.box[3],
-                }} key={widget.box.toString()} />
-                case "check_box": return <input type="checkbox" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2],
-                    height: widget.box[3],
-                }} key={widget.box.toString()} />
-                case "date": return <input type="date" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2],
-                    height: widget.box[3],
-                    fontSize: "30px"
-                }} key={widget.box.toString()} />
-                case "table":return <Table aria-label="simple table">{widget.text}</Table>;
-                case "text":return <div style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    // width: widget.box[2],
-                    lineHeight: widget.box[3]+"px",
-                    fontSize: "30px",
-                    display:"inline"
-                }}>{widget.text}</div>;
-                case "text_area":return <input type="textarea" style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    width: widget.box[2],
-                    height: widget.box[3],
-                }} key={widget.box.toString()} value={widget.text} />
-                case "section_header":return <u> <h1 style={{
-                    position:"absolute",
-                    left: widget.box[0],
-                    top: widget.box[1],
-                    // width: widget.box[2],
-                    lineHeight: widget.box[3]+"px",
-                    fontSize: "30px",
-                    display:"inline"
-                }}>{widget.text}</h1></u>;
-                default: return <></>;
-            }
+  const formObj=props.form.form_meta_data;
+  return (
+    <div className="form-result-padding">
+      <div className="form-result-content" style={{
+        width: formObj.w,
+        height: formObj.h,
+        backgroundColor: 'White'}}>
+        {formObj.widgets.map((widget) => {
+          switch (widget.class) {
+            case 'drop_down': return <div style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              maxWidth: widget.box[2],
+              height: widget.box[3],
+              overflow: 'hidden',
+            }} key={widget.box.toString()}><select style={{
+                width: '100%',
+                height: '100%',
+              }} > <option >{widget.text}</option></select> </div>;
+            case 'button': return <button style={{
+              position: 'absolute',
+              fontSize: '24px',
+              left: widget.box[0],
+              top: widget.box[1],
+              borderRadius: '10px',
+              width: widget.box[2],
+            }} key={widget.box.toString()}><div contentEditable={true} suppressContentEditableWarning={true}>{widget.text} </div></button>;
+            case 'text_box': return <div style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              maxWidth: widget.box[2],
+              height: widget.box[3],
+              overflow: 'hidden',
+            }} key={widget.box.toString()}><input type="text" value={widget.text} style={{
+                width: '100%',
+                height: '100%',
+              }} onChange={null} ></input> </div>;
+            case 'radio': return <input type="radio" style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              height: widget.box[3],
+            }} key={widget.box.toString()} onChange={null} />;
+            case 'check_box': return <input type="checkbox" style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              height: widget.box[3],
+            }} key={widget.box.toString()} onChange={null}/>;
+            case 'date': return <input type="date" style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              height: widget.box[3],
+              fontSize: '20px',
+            }} key={widget.box.toString()} onChange={null}/>;
+            case 'text': return <div style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              // width: widget.box[2],
+              lineHeight: widget.box[3]+'px',
+              fontSize: '30px',
+              display: 'inline',
+            }} key={widget.box.toString()} contentEditable={true} suppressContentEditableWarning={true}>{widget.text}</div>;
+            case 'text_area': return <input type="textarea" style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              height: widget.box[3],
+              lineHeight: widget.box[3]+'px',
+              fontSize: '30px',
+              textAlign: 'top',
+            }} key={widget.box.toString()} value={widget.text} onChange={null} />;
+            case 'image': return <img src="images/default-image.jpg" style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              width: widget.box[2],
+              height: widget.box[3],
+              zIndex: 100,
+            }} key={widget.box.toString()} alt="default.." value={widget.text} />;
+            case 'section_header': return <h1 style={{
+              position: 'absolute',
+              left: widget.box[0],
+              top: widget.box[1],
+              // width: widget.box[2],
+              lineHeight: widget.box[3]+'px',
+              fontSize: '30px',
+              display: 'inline',
+              textDecoration: 'underline',
+            }} key={widget.box.toString()} contentEditable={true} suppressContentEditableWarning={true}>{widget.text}</h1>;
+            // case 'table': return <Table aria-label="simple table">
+            // {widget.text}</Table>;
+            default: return <></>;
+          }
         })}
+      </div>
     </div>
-    );
-}
+  );
+};
 
-export default Form
+export default Form;

@@ -1,45 +1,46 @@
-import { Link } from "react-router-dom"
+import {Link} from 'react-router-dom';
+import Avatar from 'react-avatar';
 
-const Header = () => {
-    return (
-        <header id="design_header">
-            <h1 className="Name">Wireweb</h1>
-            <nav id="nav-wrap">
-            <a className="mobile-btn" href="#nav-wrap" title="Show navigation">
-                Show navigation
-            </a>
-            <a className="mobile-btn" href="#home" title="Hide navigation">
-                Hide navigation
-            </a>
+const Header = (props) => {
+  return (
+    <header id="design_header">
+      <h1 className="Name">Wireweb</h1>
+      <nav id="nav-wrap">
+        <ul id="nav" className="nav">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
 
-            <ul id="nav" className="nav">
-                <li>
-                    <Link className="smoothscroll" to="/home">Home</Link>
-                </li>
+          <li>
+            <Link href="#about"
+              to="/home#about">About</Link>
+          </li>
 
-                <li>
-                    <Link href="#about" className="smoothscroll" to="/home#about">About</Link>
-                </li>
+          <li>
+            <Link to="/">Products</Link>
 
-                <li>
-                <Link className="smoothscroll" to="/home">Products</Link>
+          </li>
 
-                </li>
+          <li>
+            <Link to="/home">Pricing</Link>
 
-                <li>
-                <Link className="smoothscroll" to="/home">Pricing</Link>
+          </li>
 
-                </li>
+          <li>
+            <Link to="/home">Contact</Link>
 
-                <li>
-                <Link className="smoothscroll" to="/home">Contact</Link>
+          </li>
+        </ul>
+        <div className="left-corner-item" >
+          <span className="top-left-avatar">
+            <Avatar name={props.user==null?'An':props.user.name}
+              size={60} round={true} textSizeRatio={3} maxInitials={2}/>
+          </span>
+        </div>
+      </nav>
 
-                </li>
-            </ul>
-            </nav>
+    </header>
+  );
+};
 
-        </header>
-    )
-}
-
-export default Header
+export default Header;
